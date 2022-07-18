@@ -20,6 +20,8 @@ jobs:
           echo "Event Ref: ${{ github.ref }}"
           echo "Event Ref Type: ${{ github.ref_type }}"
           echo "Event Ref Name: ${{ github.ref_name }}"
+          echo "Event Pre-Release: ${{ github.event.release.prerelease }}"
+          echo "Event Release Tag: ${{ github.event.release.tag_name }}"
 
           # looks like master_branch is deprecated, but it's still available
           printf "Main Branch: \n\tgithub.event.repository.master_branch: ${{ github.event.repository.master_branch }}\n\tgithub.event.repository.default_branch: ${{ github.event.repository.default_branch }}"
