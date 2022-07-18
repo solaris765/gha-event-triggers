@@ -21,11 +21,9 @@ jobs:
           echo "Event Ref: ${{ github.ref }}"
           echo "Event Ref Type: ${{ github.ref_type }}"
           echo "Event Ref Name: ${{ github.ref_name }}"
+          echo "Default Branch: ${{ github.event.repository.default_branch }}"
           echo "Event Pre-Release: ${{ github.event.release.prerelease }}"
           echo "Event Release Tag: ${{ github.event.release.tag_name }}"
-
-          # looks like master_branch is deprecated, but it's still available
-          printf "Main Branch: \n\tgithub.event.repository.master_branch: ${{ github.event.repository.master_branch }}\n\tgithub.event.repository.default_branch: ${{ github.event.repository.default_branch }}"
       - name: Where did you go?
         run: |
           if [[ "${{ github.ref_type }}" == "tag" ]]; then
@@ -45,7 +43,7 @@ jobs:
           else
             echo "You are on something else"
           fi
-      - name: Where did you come from Cotton Eyed Joe?
+      - name: Where did you come from Cotton Eye Joe?
         env:
           GHA_OBJ: ${{ toJson(github) }}
         run: |
