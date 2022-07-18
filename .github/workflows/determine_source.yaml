@@ -17,8 +17,11 @@ jobs:
           echo "Event Ref: ${{ github.ref }}"
           echo "Event Ref Type: ${{ github.ref_type }}"
           echo "Event Ref Name: ${{ github.ref_name }}"
+          echo " Main Branch: ${{ github.main_branch }}"
       - name: Whole dang thing
+        env:
+          GHA_OBJ: ${{ toJson(github) }}
         run: |
-          jq '${{ toJson(github) }}'
+          echo $GHA_OBJ | jq .
 
           
