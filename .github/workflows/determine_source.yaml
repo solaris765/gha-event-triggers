@@ -24,6 +24,6 @@ jobs:
         env:
           GHA_OBJ: ${{ toJson(github) }}
         run: |
-          echo $GHA_OBJ | jq -C .
+          echo $GHA_OBJ | jq .
 
           
