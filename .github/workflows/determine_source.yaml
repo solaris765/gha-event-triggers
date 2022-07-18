@@ -2,6 +2,9 @@ name: Determine event source
 
 on:
   push:
+    # If you don't specify a branch, it will also trigger on tags. Which may not be desirable when also triggering on release events.
+    branches:
+      - "*"
   workflow_dispatch:
   release:
     published:
