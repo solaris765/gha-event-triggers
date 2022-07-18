@@ -13,15 +13,12 @@ jobs:
       - name: Determine source
         run: |
           echo "Event name: ${{ github.event_name }}"
-          echo "Event Head Ref: ${{ github.event.head_ref }}"
-          echo "Event Ref: ${{ github.event.ref }}"
-          echo "Event Ref Type: ${{ github.event.ref_type }}"
-          echo "Event Ref Name: ${{ github.event.ref_name }}"
-  where-did-you-go:
-    runs-on: ubuntu-latest
-    steps:
+          echo "Event Head Ref: ${{ github.head_ref }}"
+          echo "Event Ref: ${{ github.ref }}"
+          echo "Event Ref Type: ${{ github.ref_type }}"
+          echo "Event Ref Name: ${{ github.ref_name }}"
       - name: Whole dang thing
         run: |
-          echo '${{ toJson(github) }}'
+          jq '${{ toJson(github) }}'
 
           
