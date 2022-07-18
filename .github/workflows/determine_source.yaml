@@ -17,7 +17,9 @@ jobs:
           echo "Event Ref: ${{ github.ref }}"
           echo "Event Ref Type: ${{ github.ref_type }}"
           echo "Event Ref Name: ${{ github.ref_name }}"
-          echo "Main Branch: ${{ github.event.repository.master_branch }}"
+
+          # Not always available it seems
+          echo "Main Branch: \n\tgithub.event.repository.master_branch: ${{ github.event.repository.master_branch }}\n\tgithub.event.repository.default_branch: ${{ github.event.repository.default_branch }}"
       - name: Whole dang thing
         env:
           GHA_OBJ: ${{ toJson(github) }}
