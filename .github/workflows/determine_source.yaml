@@ -10,10 +10,11 @@ on:
     types: [published]
 
 jobs:
-  where-did-you-come-from:
+  determine_source:
     runs-on: ubuntu-latest
+    name: Determine source
     steps:
-      - name: Determine source
+      - name: Where did you come from?
         run: |
           echo "Event name: ${{ github.event_name }}"
           echo "Event Head Ref: ${{ github.head_ref }}"
@@ -25,7 +26,26 @@ jobs:
 
           # looks like master_branch is deprecated, but it's still available
           printf "Main Branch: \n\tgithub.event.repository.master_branch: ${{ github.event.repository.master_branch }}\n\tgithub.event.repository.default_branch: ${{ github.event.repository.default_branch }}"
-      - name: Whole dang thing
+      - name: Where did you go?
+        run: |
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
+              echo "This event was triggered by a pre-release tag."
+            else
+              echo "This event was triggered by a release tag."
+            fi
+          elif [[ "${{ github.ref_type }}" == "branch" ]]; then
+            if [[ "${{ github.event.repository.default_branch }}" == "${{ github.ref_name }}" ]]; then
+              echo "This event was triggered by a push to the default branch (${{ github.ref_name }})."
+            else
+              echo "This event was triggered by a push to branch \"${{ github.ref_name }}\"."
+            fi
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "This event was triggered by a workflow dispatch on branch \"${{ github.ref_name }}\"."
+          else
+            echo "You are on something else"
+          fi
+      - name: Where did you come from Cotton Eyed Joe?
         env:
           GHA_OBJ: ${{ toJson(github) }}
         run: |
