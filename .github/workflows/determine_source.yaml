@@ -1,0 +1,20 @@
+name: Determine event source
+
+on:
+  push:
+  workflow_dispatch:
+  release:
+    published:
+
+jobs:
+  where-did-you-come-from:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine source
+        run: |
+          echo "Event name: {{ .GitHub.Event.Name }}"
+          echo "Event Head Ref: {{ .GitHub.Event.HeadRef }}"
+          echo "Event Ref: {{ .GitHub.Event.Ref }}"
+          echo "Event Ref Type: {{ .GitHub.Event.RefType }}"
+
+          
