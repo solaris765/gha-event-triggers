@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Determine source
         run: |
-          echo "Event Json: ${{ toJson(github.event) }}"
+          echo "github Json: jq ${{ toJson(github) }}"
           echo "Event name: ${{ github.event.Name }}"
           echo "Event Head Ref: ${{ github.event.HeadRef }}"
           echo "Event Ref: ${{ github.event.Ref }}"
