@@ -12,9 +12,10 @@ jobs:
     steps:
       - name: Determine source
         run: |
-          echo "Event name: {{ .GitHub.Event.Name }}"
-          echo "Event Head Ref: {{ .GitHub.Event.HeadRef }}"
-          echo "Event Ref: {{ .GitHub.Event.Ref }}"
-          echo "Event Ref Type: {{ .GitHub.Event.RefType }}"
+          echo "Event Json: {{ github.event }}"
+          echo "Event name: {{ github.event.Name }}"
+          echo "Event Head Ref: {{ github.event.HeadRef }}"
+          echo "Event Ref: {{ github.event.Ref }}"
+          echo "Event Ref Type: {{ github.event.RefType }}"
 
           
