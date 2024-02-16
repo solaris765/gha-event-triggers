@@ -48,5 +48,19 @@ jobs:
           GHA_OBJ: ${{ toJson(github) }}
         run: |
           echo $GHA_OBJ | jq .
-
+  get_github_environment:
+    runs-on: ubuntu-latest
+    name: Get GitHub "deployment Environments
+    steps:
+      - name: List Workflow Environments
+        id: list-environments
+        run: |
+          TOKEN=$GITHUB_TOKEN
+          REPO=$(echo "$GITHUB_REPOSITORY" | cut -d '/' -f 2)
+          OWNER=$(echo "$GITHUB_REPOSITORY" | cut -d '/' -f 1)
           
+          curl -s -H "Authorization: token $TOKEN" \
+          "https://api.github.com/repos/$OWNER/$REPO/environments" \
+          | jq -r '.[] | .name'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
