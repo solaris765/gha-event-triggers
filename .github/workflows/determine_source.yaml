@@ -61,7 +61,6 @@ jobs:
           
           curl -s -H "Authorization: token $TOKEN" \
           "https://api.github.com/repos/$OWNER/$REPO/environments" \
-          | jq -r '.[].name'
+          | jq '.environments | .[].name'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
